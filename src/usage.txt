@@ -14,6 +14,9 @@
   \1;33m-t\0m, \1;33m--type\0m=\33mTYPE\0m          Type of the DNS record being queried (A, MX, NS...)
   \1;33m-n\0m, \1;33m--nameserver\0m=\33mADDR\0m    Address of the nameserver to send packets to
   \1;33m--class\0m=\33mCLASS\0m            Network class of the DNS record being queried (IN, CH, HS)
+  \1;33m--all\0m                    Query every record type dog knows (A, AAAA, NS, SOA, MX,
+                           TXT, CAA, SRV, CNAME, PTR, NAPTR, TLSA, LOC, HINFO,
+                           SSHFP, OPENPGPKEY, EUI48, EUI64, URI)
 
 \4mSending options:\0m
   \1;33m--edns\0m=\33mSETTING\0m           Whether to OPT in to EDNS (disable, hide, show)

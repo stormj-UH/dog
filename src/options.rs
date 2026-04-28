@@ -50,6 +50,7 @@ impl Options {
         opts.optmulti("t", "type",        "Type of the DNS record being queried (A, MX, NS...)", "TYPE");
         opts.optmulti("n", "nameserver",  "Address of the nameserver to send packets to", "ADDR");
         opts.optmulti("",  "class",       "Network class of the DNS record being queried (IN, CH, HS)", "CLASS");
+        opts.optflag ("",  "all",         "Query every record type dog knows about");
 
         // Sending options
         opts.optopt  ("",  "edns",         "Whether to OPT in to EDNS (disable, hide, show)", "SETTING");
@@ -158,6 +159,12 @@ impl Inputs {
     fn load_named_args(&mut self, matches: &getopts::Matches) -> Result<(), OptionsError> {
         for domain in matches.opt_strs("query") {
             self.add_domain(&domain)?;
+        }
+
+        if matches.opt_present("all") {
+            for record_type in RecordType::ALL_KNOWN {
+                self.add_type(*record_type);
+            }
         }
 
         for record_name in matches.opt_strs("type") {

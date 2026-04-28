@@ -172,6 +172,34 @@ impl From<u16> for RecordType {
 
 impl RecordType {
 
+    /// Every record type dog knows how to parse, in alphabetical order.
+    /// Used by the `--all` command-line flag to enumerate queries when
+    /// the user wants every record type for a given host.
+    /// `Other(_)` is excluded because there's no concrete type number to
+    /// query against; users wanting an unrecognised type should pass it
+    /// numerically with `-t <NUMBER>`.
+    pub const ALL_KNOWN: &'static [Self] = &[
+        Self::A,
+        Self::AAAA,
+        Self::CAA,
+        Self::CNAME,
+        Self::EUI48,
+        Self::EUI64,
+        Self::HINFO,
+        Self::LOC,
+        Self::MX,
+        Self::NAPTR,
+        Self::NS,
+        Self::OPENPGPKEY,
+        Self::PTR,
+        Self::SSHFP,
+        Self::SOA,
+        Self::SRV,
+        Self::TLSA,
+        Self::TXT,
+        Self::URI,
+    ];
+
     /// Determines the record type with a given name, or `None` if none is
     /// known. Matches names case-insensitively.
     pub fn from_type_name(type_name: &str) -> Option<Self> {
